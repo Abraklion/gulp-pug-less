@@ -12,7 +12,7 @@ global.$ = {
     src: require('./gulp/config'),
 
     toggle: {
-      minHtml: false, // true / false
+      minHtml: true, // true / false
       fullCss: false, // true / false
       fullJs: false, // true / false
       resizeImg: false, // true / false
@@ -28,7 +28,8 @@ global.$ = {
         webp: 'src/assets/img/webp/',
         svg: 'src/assets/img/sprite/**/*.svg'
       },
-      fonts: 'src/assets/fonts/'
+      fonts: 'src/assets/fonts/',
+      other: 'src/other/'
     },
     output: {
       path: 'dist',
@@ -46,7 +47,8 @@ global.$ = {
         webp: 'src/assets/img/webp/*.{jpg,png,gif}',
         svg: 'src/assets/img/sprite/**/*.svg'
       },
-      fonts: 'src/assets/fonts/'
+      fonts: 'src/assets/fonts/',
+      other: 'src/other/'
     }
   }
 }
@@ -55,7 +57,7 @@ $.config.src.forEach(function (path) {
   require(path)();
 });
 
-const build = $.gulp.series('clean', $.gulp.parallel('pug','styles','scripts','fonts','images','sprite'));
+const build = $.gulp.series('clean', $.gulp.parallel('pug','styles','scripts','fonts','images','sprite','copy'));
 const watch = $.gulp.series(build, $.gulp.parallel('serve', 'watcher'));
 
 exports.build = build;
